@@ -1,4 +1,5 @@
 var maniac = require('../barbarian');
+var beer = require('../beer');
 var assert = require('assert');
 
 describe("Barbarian", function() {
@@ -28,10 +29,16 @@ describe("Barbarian", function() {
     assert.equal("Rolling Rock", maniac.favebeer);
   });
 
-  it('should increase health by 2 for every fave beer drank', function() {
-    barbarian.drink(1);
+  it('should increase health by 2 for every fave beer drank and anger not increase', function() {
+    maniac.drink("Rolling Rock");
     assert.equal(52, maniac.health);
-    assert.equal(0, maniac.angerlevel);
+    assert.equal(10, maniac.angerlevel);
   });
+
+  it('should not increase health if not fave beer drank and increase angerlevel by 10', function() {
+    maniac.drink("Tennents");
+    assert.equal(50, maniac.health);
+    assert.equal(20, maniac.angerlevel);
+  })
 
 })
